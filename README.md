@@ -1,11 +1,10 @@
-Heading
+# Laravel SQL AI Agent
 
-Laravel SQL AI Agent
+## Features
 
-Features
-Natural language to SQL
-SQL to Eloquent
-Query optimization
-Dangerous query detection
-Schema-aware generation
-Laravel AI SDK powered
+- Natural language to SQL  
+- SQL to Eloquent  
+- Query optimization  
+- Dangerous query detection  
+- Schema-aware generation  
+- Laravel AI SDK powered
