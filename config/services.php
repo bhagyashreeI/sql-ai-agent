@@ -39,5 +39,10 @@ return [
         'key' => env('OPENAI_API_KEY'),
         'url' => env('OPENAI_BASE_URL'),
     ],
+    'gemini' => [
+        'driver' => 'gemini',
+        'key' => env('GEMINI_API_KEY'),
+        'url' => env('GEMINI_BASE_URL'),
+    ],
 
 ];

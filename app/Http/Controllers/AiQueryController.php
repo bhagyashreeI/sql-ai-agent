@@ -16,31 +16,8 @@ class AiQueryController extends Controller
             $request->prompt
         );
 
-        dd($result);
 
-        //return response()->json($result);
+        return response()->json($result);
 
-        $prompt2 = "
-Convert request into JSON:
-
-{
-  \"sql\": \"\",
-  \"eloquent\": \"\",
-  \"builder\": \"\"
-}
-
-Request:
-{$request->prompt}
-
-Return JSON only.
-";
-
-        $response = Ai::chat()
-            ->message($prompt)
-            ->send();
-
-        return response()->json(
-            json_decode($response->text(), true)
-        );
     }
 }
