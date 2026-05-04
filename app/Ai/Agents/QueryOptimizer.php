@@ -4,53 +4,40 @@ namespace App\Ai\Agents;
 
 use Illuminate\Contracts\JsonSchema\JsonSchema;
 use Laravel\Ai\Contracts\Agent;
-use Laravel\Ai\Contracts\Conversational;
 use Laravel\Ai\Contracts\HasStructuredOutput;
-use Laravel\Ai\Contracts\HasTools;
-use Laravel\Ai\Contracts\Tool;
-use Laravel\Ai\Messages\Message;
 use Laravel\Ai\Promptable;
 use Stringable;
 
-class QueryOptimizer implements Agent, Conversational, HasStructuredOutput, HasTools
+class QueryOptimizer implements Agent, HasStructuredOutput
 {
     use Promptable;
 
-    /**
-     * Get the instructions that the agent should follow.
-     */
     public function instructions(): Stringable|string
     {
-        return 'You are a helpful assistant.';
+        return <<<PROMPT
+You are a SQL performance expert.
+
+Given a MySQL query, rewrite it to be more efficient.
+
+Guidelines:
+- Keep the result semantics identical
+- Add appropriate WHERE filters if missing (only when implied by prompt)
+- Prefer indexed columns when possible (assume common indexes like id, foreign keys, created_at)
+- Avoid SELECT *
+- Add LIMIT where reasonable for listing queries
+- Remove unnecessary joins/subqueries
+- Use proper aggregation and grouping
+- Keep it safe (no destructive statements)
+
+Return only structured output.
+PROMPT;
     }
 
-    /**
-     * Get the list of messages comprising the conversation so far.
-     *
-     * @return Message[]
-     */
-    public function messages(): iterable
-    {
-        return [];
-    }
-
-    /**
-     * Get the tools available to the agent.
-     *
-     * @return Tool[]
-     */
-    public function tools(): iterable
-    {
-        return [];
-    }
-
-    /**
-     * Get the agent's structured output schema definition.
-     */
     public function schema(JsonSchema $schema): array
     {
         return [
-            'value' => $schema->string()->required(),
+            'optimized_sql' => $schema->string()->required(),
+            'improvements'  => $schema->string()->required(),
         ];
     }
 }

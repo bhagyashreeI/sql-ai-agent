@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/generate-query', [AiQueryController::class, 'generate']);
+Route::post('/generate-query', [AiQueryController::class, 'generate_using_singleAgent']);
 //Route::view('/{any}', 'app')->where('any', '.*');
 
 
