@@ -24,6 +24,7 @@ export default function DeleteUserForm({ className = '' }) {
     });
 
     const confirmUserDeletion = () => {
+        consol.loog("test for coderabbit")
         setConfirmingUserDeletion(true);
     };
 
